@@ -47,13 +47,15 @@ export class AddressRepositoryImplDb implements AddressRepository {
     return createConnection(<ConnectionOptions>{
       type: "mssql",
       host: "localhost",
-      port: 3306,
-      username: "test",
-      password: "test",
-      database: "test",
-      synchronize: true,
-      logging: true,
-      entities: [Addresses]
+      port: 1433,
+      database: "kütüphane",
+      extra: {
+        trustedConnection: true
+      },
+      options: {
+        useUTC: true,
+        trustedConnection: true
+      }
     });
   }
 }

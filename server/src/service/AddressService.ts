@@ -15,7 +15,7 @@ export interface AddressService {
 
 @injectable()
 export class AddressServiceImpl implements AddressService {
-  @inject(TYPES.AddressRepository2)
+  @inject(TYPES.AddressRepository)
   private addressRepositoryDb: AddressRepository;
 
   public async getAddresses(): Promise<Array<Address>> {
