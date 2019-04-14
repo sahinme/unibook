@@ -1,4 +1,6 @@
 {
+    "extends": "tslint:recommended",
+
     "rules": {
         "class-name": true,
         "comment-format": [
@@ -14,17 +16,27 @@
             "check-open-brace",
             "check-whitespace"
         ],
-        "no-var-keyword": true,
+        "no-var-requires": false,
+
         "quotemark": [
             true,
-            "double",
-            "avoid-escape"
+            "single"
+        ],
+        "interface-name": [
+            true,
+            "never-prefix"
         ],
         "semicolon": [
             true,
             "always",
             "ignore-bound-class-methods"
         ],
+        "max-line-length": [true, 160],
+        "trailing-comma": [true, {
+            "multiline": "never",
+            "singleline": "never"
+        }],
+        "object-literal-sort-keys": false,
         "whitespace": [
             true,
             "check-branch",
