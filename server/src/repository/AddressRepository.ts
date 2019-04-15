@@ -46,7 +46,9 @@ export class AddressRepositoryImplDb implements AddressRepository {
   private connect(): Promise<Connection> {
     return createConnection(<ConnectionOptions>{
       type: "mssql",
-      host: "localhost",
+      host: "DESKTOP-UGAPJQC\\SQLEXPRESS",
+      username: "user1",
+      password: "salopa44",
       port: 1433,
       database: "kütüphane",
       extra: {
@@ -55,7 +57,8 @@ export class AddressRepositoryImplDb implements AddressRepository {
       options: {
         useUTC: true,
         trustedConnection: true
-      }
+      },
+      entities: ["src/entity/**/*.ts"]
     });
   }
 }
