@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import { AddressDTO, Addresses } from "../entity/Address";
+import { AddressDTO, Addresses } from "../entity/Addresses";
 import { logger } from "../util/Logger";
 import {
   createConnection,
@@ -7,16 +7,10 @@ import {
   Repository,
   ConnectionOptions
 } from "typeorm";
-
-export interface AddressRepository {
-  findAll(): Promise<Array<AddressDTO>>;
-  create(addressDTO: AddressDTO): Promise<AddressDTO>;
-  update(addressDTO: AddressDTO): Promise<AddressDTO>;
-  find(id: string): Promise<AddressDTO>;
-}
+import { BaseRepository } from "./BaseRepository";
 
 @injectable()
-export class AddressRepositoryImplDb implements AddressRepository {
+export class AddressRepositoryImplDb implements BaseRepository<AddressDTO> {
   private addressRepository: Repository<Addresses>;
 
   constructor() {
@@ -39,8 +33,12 @@ export class AddressRepositoryImplDb implements AddressRepository {
     return await this.addressRepository.save(addressDTO);
   }
 
-  public async find(id: string): Promise<AddressDTO> {
+  public async find(id: number): Promise<AddressDTO> {
     return await this.addressRepository.findOne(id);
+  }
+
+  public async delete(id: number): Promise<any> {
+    return await this.addressRepository.delete(id);
   }
 
   private connect(): Promise<Connection> {

@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 export interface AddressDTO {
-  _id?: string;
+  _id?: number;
   address1: string;
   address2?: string;
   city: string;
@@ -13,7 +13,7 @@ export interface AddressDTO {
 @Entity()
 export class Addresses implements AddressDTO {
   @PrimaryGeneratedColumn()
-  public _id?: string;
+  public _id: number;
   @Column()
   public address1: string;
   @Column()

@@ -1,22 +1,23 @@
 import { injectable, inject } from "inversify";
 import { Address } from "../model/Address";
-import { AddressRepository } from "../repository/AddressRepository";
 import TYPES from "../types";
 import "reflect-metadata";
-import { AddressDTO } from "../entity/Address";
+import { AddressDTO, Addresses } from "../entity/Addresses";
 import * as _ from "lodash";
+import { AddressRepositoryImplDb } from "../repository/AddressRepository";
 
 export interface AddressService {
   getAddresses(): Promise<Array<Address>>;
   createAddress(address: Address): Promise<Address>;
   updateAddress(address: Address): Promise<Address>;
-  getAddress(id: string): Promise<Address>;
+  getAddress(id: number): Promise<Address>;
+  deleteAddress(id: number): Promise<any>;
 }
 
 @injectable()
 export class AddressServiceImpl implements AddressService {
   @inject(TYPES.AddressRepository)
-  private addressRepositoryDb: AddressRepository;
+  private addressRepositoryDb: AddressRepositoryImplDb;
 
   public async getAddresses(): Promise<Array<Address>> {
     const addressesDb: Array<
@@ -46,7 +47,7 @@ export class AddressServiceImpl implements AddressService {
     return await this.toAddressDTO(updated);
   }
 
-  public async getAddress(id: string): Promise<Address> {
+  public async getAddress(id: number): Promise<Address> {
     let address = await this.addressRepositoryDb.find(id).then(a => {
       return this.toAddressDTO(a);
     });
@@ -56,6 +57,10 @@ export class AddressServiceImpl implements AddressService {
     }
 
     return address;
+  }
+
+  public async deleteAddress(id: number): Promise<any> {
+    await this.addressRepositoryDb.delete(id);
   }
 
   private toAddress(address: Address): AddressDTO {
@@ -78,7 +83,7 @@ export class AddressServiceImpl implements AddressService {
       addressDTO.state,
       addressDTO.zip,
       addressDTO.country,
-      addressDTO._id.toString()
+      addressDTO._id
     );
   }
 }

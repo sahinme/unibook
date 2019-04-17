@@ -42,6 +42,8 @@ export class AddressController implements RegistrableController {
             req.body.zip,
             req.body.country
           );
+          console.log(address);
+          console.log(req.body);
           const createdAddress = await this.addressService
             .createAddress(address)
             .catch(err => next(err));
@@ -58,7 +60,7 @@ export class AddressController implements RegistrableController {
           next: express.NextFunction
         ) => {
           const addresses = await this.addressService
-            .getAddress(<string>req.params.id)
+            .getAddress(<number>req.params.id)
             .catch(err => next(err));
           res.json(addresses);
         }
@@ -83,6 +85,18 @@ export class AddressController implements RegistrableController {
             .updateAddress(address)
             .catch(err => next(err));
           res.json(updatedAddress);
+        }
+      )
+      .delete(
+        async (
+          req: express.Request,
+          res: express.Response,
+          next: express.NextFunction
+        ) => {
+          await this.addressService
+            .deleteAddress(<number>req.params.id)
+            .catch(err => next(err));
+          res.json({ msg: "Deleted succesfully" });
         }
       );
   }
