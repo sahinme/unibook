@@ -80,6 +80,7 @@ export class AddressController implements RegistrableController {
             req.body.country,
             req.body.id
           );
+          console.log(req.body);
 
           const updatedAddress = await this.addressService
             .updateAddress(address)

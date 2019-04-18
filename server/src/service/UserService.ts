@@ -3,17 +3,15 @@ import TYPES from "../types";
 import "reflect-metadata";
 import * as _ from "lodash";
 import { User } from "../model/User";
-import {
-  UserRepository,
-  UserRepositoryImplDb
-} from "../repository/UserRepository";
+import { UserRepositoryImplDb } from "../repository/UserRepository";
 import { UserDTO } from "../entity/Users";
 
 export interface UserService {
   getUsers(): Promise<Array<User>>;
   createUser(user: User): Promise<User>;
   updateUser(user: User): Promise<User>;
-  getUser(id: string): Promise<User>;
+  getUser(id: number): Promise<User>;
+  deleteUser(id: number): Promise<any>;
 }
 
 @injectable()
@@ -26,7 +24,7 @@ export class UsersServiceImpl implements UserService {
       .findAll()
       .then(a2 =>
         a2.map((dto: UserDTO) => {
-          return this.toUser(dto);
+          return this.toUserDTO(dto);
         })
       );
 
@@ -38,8 +36,6 @@ export class UsersServiceImpl implements UserService {
 
     const createdDTO: UserDTO = await this.userRepositoryDb.create(userDTO);
 
-    // duplicates the address in the DB
-
     return await this.toUserDTO(createdDTO);
   }
 
@@ -48,12 +44,10 @@ export class UsersServiceImpl implements UserService {
 
     const updated: UserDTO = await this.userRepositoryDb.update(userDTO);
 
-    // update db address
-
     return await this.toUserDTO(updated);
   }
 
-  public async getUser(id: string): Promise<User> {
+  public async getUser(id: number): Promise<User> {
     let address = await this.userRepositoryDb.find(id).then(a => {
       return this.toUserDTO(a);
     });
@@ -61,15 +55,43 @@ export class UsersServiceImpl implements UserService {
     return address;
   }
 
+  public async deleteUser(id: number): Promise<any> {
+    return await this.userRepositoryDb.delete(id);
+  }
+
   private toUser(user: User): UserDTO {
     return {
-      name: user.name,
-      surname: user.surname,
-      _id: user._id
+      name: user.getName,
+      surname: user.getSurname,
+      _id: user.getId,
+      username: user.getUsername,
+      password: user.getPassword,
+      email: user.getEmail,
+      major: user.getMajor,
+      college: user.getCollege,
+      isGraduated: user.getIsGraduated,
+      male: user.getMale,
+      phoneNumber: user.getPhoneNumber,
+      birthDate: user.getBirthDate,
+      faculty: user.getFaculty
     };
   }
 
   private toUserDTO(userDTO: UserDTO): User {
-    return new User(userDTO.name, userDTO.surname, userDTO._id);
+    return new User(
+      userDTO.name,
+      userDTO.surname,
+      userDTO.username,
+      userDTO.password,
+      userDTO.email,
+      userDTO.major,
+      userDTO.college,
+      userDTO.faculty,
+      userDTO.isGraduated,
+      userDTO.male,
+      userDTO.phoneNumber,
+      userDTO.birthDate,
+      userDTO._id
+    );
   }
 }

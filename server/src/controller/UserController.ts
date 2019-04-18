@@ -44,7 +44,7 @@ export class UserController implements RegistrableController {
       );
 
     app
-      .route("/:id")
+      .route("/user/:id")
       .get(
         async (
           req: express.Request,
@@ -52,7 +52,7 @@ export class UserController implements RegistrableController {
           next: express.NextFunction
         ) => {
           const users = await this.userService
-            .getUser(<string>req.params.id)
+            .getUser(<number>req.params.id)
             .catch(err => next(err));
           res.json(users);
         }
@@ -63,12 +63,24 @@ export class UserController implements RegistrableController {
           res: express.Response,
           next: express.NextFunction
         ) => {
-          const user = new User(req.body.name, req.body.surname, req.body._id);
+          const user = new User(req.body.name, req.body.surname, req.body.id);
 
           const updatedUser = await this.userService
             .updateUser(user)
             .catch(err => next(err));
           res.json(updatedUser);
+        }
+      )
+      .delete(
+        async (
+          req: express.Request,
+          res: express.Response,
+          next: express.NextFunction
+        ) => {
+          await this.userService
+            .deleteUser(<number>req.params.id)
+            .catch(err => next(err));
+          res.json({ msg: "Deleted succesfully" });
         }
       );
   }

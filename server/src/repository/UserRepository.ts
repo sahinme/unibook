@@ -12,7 +12,9 @@ export interface UserRepository {
   findAll(): Promise<Array<UserDTO>>;
   create(userDTO: UserDTO): Promise<UserDTO>;
   update(userDTO: UserDTO): Promise<UserDTO>;
-  find(id: string): Promise<UserDTO>;
+  find(id: number): Promise<UserDTO>;
+
+  delete(id: number): Promise<any>;
 }
 
 @injectable()
@@ -39,8 +41,12 @@ export class UserRepositoryImplDb implements UserRepository {
     return await this.userRepository.save(userDTO);
   }
 
-  public async find(id: string): Promise<UserDTO> {
+  public async find(id: number): Promise<UserDTO> {
     return await this.userRepository.findOne(id);
+  }
+
+  public async delete(id: number): Promise<any> {
+    return await this.userRepository.delete(id);
   }
 
   private connect(): Promise<Connection> {
