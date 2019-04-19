@@ -48,11 +48,11 @@ export class UsersServiceImpl implements UserService {
   }
 
   public async getUser(id: number): Promise<User> {
-    let address = await this.userRepositoryDb.find(id).then(a => {
+    let user = await this.userRepositoryDb.find(id).then(a => {
       return this.toUserDTO(a);
     });
 
-    return address;
+    return user;
   }
 
   public async deleteUser(id: number): Promise<any> {

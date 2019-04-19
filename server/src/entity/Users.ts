@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { SqlInMemory } from "typeorm/driver/SqlInMemory";
 
 export interface UserDTO {
   _id?: number;
@@ -9,7 +10,6 @@ export interface UserDTO {
   email: string;
   major: string;
   college: string;
-
   faculty: string;
   isGraduated: boolean;
   male?: string;
@@ -44,6 +44,6 @@ export class Users implements UserDTO {
   public male?: string;
   @Column()
   public phoneNumber?: string;
-  @Column()
+  @Column("date")
   public birthDate?: Date;
 }

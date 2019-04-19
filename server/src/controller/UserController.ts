@@ -34,7 +34,20 @@ export class UserController implements RegistrableController {
           res: express.Response,
           next: express.NextFunction
         ) => {
-          const user = new User(req.body.name, req.body.surname);
+          const user = new User(
+            req.body.name,
+            req.body.surname,
+            req.body.username,
+            req.body.password,
+            req.body.email,
+            req.body.major,
+            req.body.college,
+            req.body.faculty,
+            req.body.isGraduated,
+            req.body.male,
+            req.body.phoneNumber,
+            req.body.birthDate
+          );
 
           const createdUser = await this.userService
             .createUser(user)
@@ -55,6 +68,9 @@ export class UserController implements RegistrableController {
             .getUser(<number>req.params.id)
             .catch(err => next(err));
           res.json(users);
+          if (!users) {
+            res.json("user not found");
+          }
         }
       )
       .put(
@@ -63,7 +79,21 @@ export class UserController implements RegistrableController {
           res: express.Response,
           next: express.NextFunction
         ) => {
-          const user = new User(req.body.name, req.body.surname, req.body.id);
+          const user = new User(
+            req.body._id,
+            req.body.name,
+            req.body.surname,
+            req.body.username,
+            req.body.password,
+            req.body.email,
+            req.body.major,
+            req.body.college,
+            req.body.faculty,
+            req.body.isGraduated,
+            req.body.male,
+            req.body.phoneNumber,
+            req.body.birthDate
+          );
 
           const updatedUser = await this.userService
             .updateUser(user)
