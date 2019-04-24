@@ -12,7 +12,9 @@ export class User {
     private male?: string,
     private phoneNumber?: string,
     private birthDate?: Date,
-    private _id?: number
+    private _id?: number,
+    private registerDate?: Date,
+    private lastLoginDate?: Date
   ) {}
   get getName(): string {
     return this.name;
@@ -114,5 +116,18 @@ export class User {
 
   set SetFaculty(faculty: string) {
     this.faculty = faculty;
+  }
+
+  get getRegisterDate(): Date {
+    return this.registerDate;
+  }
+  set setRegisterDate(registerDate: Date) {
+    this.registerDate = registerDate;
+  }
+  get getLastLoginDate(): Date {
+    return this.lastLoginDate;
+  }
+  set setLastLoginDate(lastLoginDate: Date) {
+    this.lastLoginDate = lastLoginDate;
   }
 }

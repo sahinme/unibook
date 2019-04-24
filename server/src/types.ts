@@ -3,6 +3,7 @@ const TYPES = {
   UserRepository: Symbol("UserRepository"),
   AddressService: Symbol("AddressService"),
   UserService: Symbol("UserService"),
+  AuthorizationService: Symbol("AuthorizationService"),
   Controller: Symbol("Controller")
 };
 

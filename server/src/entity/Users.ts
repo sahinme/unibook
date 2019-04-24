@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
-import { SqlInMemory } from "typeorm/driver/SqlInMemory";
+import { Entity, Column, PrimaryGeneratedColumn, Unique } from "typeorm";
+import * as bcrypt from "bcryptjs";
 
 export interface UserDTO {
   _id?: number;
@@ -15,9 +15,12 @@ export interface UserDTO {
   male?: string;
   phoneNumber?: string;
   birthDate?: Date;
+  registerDate: Date;
+  lastLoginDate: Date;
 }
 
 @Entity()
+@Unique(["username"])
 export class Users implements UserDTO {
   @PrimaryGeneratedColumn()
   public _id: number;
@@ -46,4 +49,17 @@ export class Users implements UserDTO {
   public phoneNumber?: string;
   @Column("date")
   public birthDate?: Date;
+
+  @Column("date")
+  public registerDate: Date;
+  @Column("date")
+  public lastLoginDate: Date;
+
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, 8);
+  }
+
+  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+    return bcrypt.compareSync(unencryptedPassword, this.password);
+  }
 }

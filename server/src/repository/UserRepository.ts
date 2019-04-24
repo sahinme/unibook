@@ -7,18 +7,10 @@ import {
   ConnectionOptions
 } from "typeorm";
 import { UserDTO, Users } from "../entity/Users";
-
-export interface UserRepository {
-  findAll(): Promise<Array<UserDTO>>;
-  create(userDTO: UserDTO): Promise<UserDTO>;
-  update(userDTO: UserDTO): Promise<UserDTO>;
-  find(id: number): Promise<UserDTO>;
-
-  delete(id: number): Promise<any>;
-}
+import { BaseRepository } from "./BaseRepository";
 
 @injectable()
-export class UserRepositoryImplDb implements UserRepository {
+export class UserRepositoryImplDb implements BaseRepository<UserDTO> {
   private userRepository: Repository<Users>;
 
   constructor() {
@@ -47,6 +39,10 @@ export class UserRepositoryImplDb implements UserRepository {
 
   public async delete(id: number): Promise<any> {
     return await this.userRepository.delete(id);
+  }
+
+  public async login(username: string): Promise<UserDTO> {
+    return await this.userRepository.findOneOrFail({ where: { username } });
   }
 
   private connect(): Promise<Connection> {

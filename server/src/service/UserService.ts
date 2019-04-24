@@ -73,7 +73,9 @@ export class UsersServiceImpl implements UserService {
       male: user.getMale,
       phoneNumber: user.getPhoneNumber,
       birthDate: user.getBirthDate,
-      faculty: user.getFaculty
+      faculty: user.getFaculty,
+      registerDate: user.getRegisterDate,
+      lastLoginDate: user.getLastLoginDate
     };
   }
 
@@ -91,7 +93,9 @@ export class UsersServiceImpl implements UserService {
       userDTO.male,
       userDTO.phoneNumber,
       userDTO.birthDate,
-      userDTO._id
+      userDTO._id,
+      userDTO.registerDate,
+      userDTO.lastLoginDate
     );
   }
 }

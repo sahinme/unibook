@@ -1,14 +1,17 @@
 import express from "express";
 import * as bodyParser from "body-parser";
+import cors from "cors";
+import helmet from "helmet";
 import TYPES from "./types";
 import container from "./inversify.config";
 import { logger } from "./util/Logger";
 import { RegistrableController } from "./controller/RegisterableController";
 import "reflect-metadata";
 
-// create express application
 const app: express.Application = express();
-// let express support JSON bodies
+
+app.use(cors());
+app.use(helmet());
 app.use(bodyParser.json());
 
 // grabs the Controller from IoC container and registers all the endpoints
