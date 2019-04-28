@@ -49,15 +49,10 @@ export class Users implements UserDTO {
   public phoneNumber?: string;
   @Column("date")
   public birthDate?: Date;
-
   @Column("date")
   public registerDate: Date;
   @Column("date")
   public lastLoginDate: Date;
-
-  hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
-  }
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
     return bcrypt.compareSync(unencryptedPassword, this.password);

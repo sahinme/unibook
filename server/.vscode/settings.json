@@ -1,19 +1,9 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-    "typescript.check.workspaceVersion": false,
-    "search.exclude": {
-        "**/node_modules": true,
-        "**/bower_components": true,
-        "**/dist": true,
-        "**/coverge": true
-    },
-    "typescript.referencesCodeLens.enabled": true,
-    "tslint.ignoreDefinitionFiles": false,
-    "tslint.autoFixOnSave": true,
-    "tslint.exclude": "**/node_modules/**/*",
-    "cSpell.words": [
-        "csrf",
-        "definitelytyped",
-        "promisified"
-    ]
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.formatOnSave": true,
+    "window.zoomLevel": 1.2,
+    "breadcrumbs.enabled": true,
+    "sync.gist": "c759a3b5d38ce0addcb92d7e7139dd82",
+    "workbench.colorTheme": "Palenight Italic"
 }

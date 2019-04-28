@@ -1,3 +1,5 @@
+import * as bcrypt from "bcryptjs";
+
 export class User {
   constructor(
     private name: string,
@@ -129,5 +131,9 @@ export class User {
   }
   set setLastLoginDate(lastLoginDate: Date) {
     this.lastLoginDate = lastLoginDate;
+  }
+
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, 8);
   }
 }

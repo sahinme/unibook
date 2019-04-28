@@ -41,7 +41,7 @@ export class UserRepositoryImplDb implements BaseRepository<UserDTO> {
     return await this.userRepository.delete(id);
   }
 
-  public async login(username: string): Promise<UserDTO> {
+  public async findOneOrFail(username: string): Promise<UserDTO> {
     return await this.userRepository.findOneOrFail({ where: { username } });
   }
 

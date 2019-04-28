@@ -4,6 +4,7 @@ import TYPES from "../types";
 import { RegistrableController } from "./RegisterableController";
 import { UserService } from "../service/UserService";
 import { User } from "../model/User";
+import { checkJwt } from "../middlewares/checkJwt";
 
 @injectable()
 export class UserController implements RegistrableController {
@@ -48,7 +49,7 @@ export class UserController implements RegistrableController {
             req.body.phoneNumber,
             req.body.birthDate
           );
-
+          user.hashPassword();
           const createdUser = await this.userService
             .createUser(user)
             .catch(err => next(err));
@@ -59,6 +60,7 @@ export class UserController implements RegistrableController {
     app
       .route("/user/:id")
       .get(
+        checkJwt,
         async (
           req: express.Request,
           res: express.Response,

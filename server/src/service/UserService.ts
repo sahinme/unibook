@@ -1,7 +1,6 @@
 import { injectable, inject } from "inversify";
 import TYPES from "../types";
 import "reflect-metadata";
-import * as _ from "lodash";
 import { User } from "../model/User";
 import { UserRepositoryImplDb } from "../repository/UserRepository";
 import { UserDTO } from "../entity/Users";
@@ -56,7 +55,9 @@ export class UsersServiceImpl implements UserService {
   }
 
   public async deleteUser(id: number): Promise<any> {
-    return await this.userRepositoryDb.delete(id);
+    return await this.userRepositoryDb.delete(id).then(a => {
+      return this.toUserDTO(a);
+    });
   }
 
   private toUser(user: User): UserDTO {
