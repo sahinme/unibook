@@ -47,12 +47,12 @@ export class UserRepositoryImplDb implements BaseRepository<UserDTO> {
 
   private connect(): Promise<Connection> {
     return createConnection(<ConnectionOptions>{
-      type: "mssql",
-      host: "DESKTOP-UGAPJQC\\SQLEXPRESS",
-      username: "user1",
+      type: "postgres",
+      host: "localhost",
+      username: "postgres",
       password: "salopa44",
-      port: 1433,
-      database: "kütüphane",
+      port: 5432,
+      database: "unibook",
       extra: {
         trustedConnection: true
       },

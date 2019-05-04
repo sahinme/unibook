@@ -45,6 +45,7 @@ export class UserController implements RegistrableController {
             req.body.college,
             req.body.faculty,
             req.body.isGraduated,
+            req.body.followers,
             req.body.male,
             req.body.phoneNumber,
             req.body.birthDate
@@ -92,6 +93,7 @@ export class UserController implements RegistrableController {
             req.body.college,
             req.body.faculty,
             req.body.isGraduated,
+            req.body.followers,
             req.body.male,
             req.body.phoneNumber,
             req.body.birthDate

@@ -25,7 +25,7 @@ export class Posts implements PostDTO {
   public userId: number;
   @Column()
   public likes: number;
-  @Column("array")
+  @Column("text", { array: true })
   public comments: string[];
   @Column()
   public shareCount: number;

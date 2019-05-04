@@ -11,6 +11,7 @@ export class User {
     private college: string,
     private faculty: string,
     private isGraduated: boolean,
+    private followers: number[],
     private male?: string,
     private phoneNumber?: string,
     private birthDate?: Date,
@@ -131,6 +132,12 @@ export class User {
   }
   set setLastLoginDate(lastLoginDate: Date) {
     this.lastLoginDate = lastLoginDate;
+  }
+  get getFollowers(): Array<number> {
+    return this.followers;
+  }
+  set setFollowers(followers: number[]) {
+    this.followers = followers;
   }
 
   hashPassword() {

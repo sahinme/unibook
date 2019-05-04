@@ -1,5 +1,7 @@
 import express from "express";
 import * as bodyParser from "body-parser";
+import socketIO from "socket.io";
+import * as http from "http";
 import cors from "cors";
 import helmet from "helmet";
 import TYPES from "./types";
@@ -40,6 +42,22 @@ app.use(function(
   res.status(500).send("Internal Server Error");
 });
 
-app.listen(3000, function() {
-  logger.info("Example app listening on port 3000!");
+const server = http.createServer(app);
+
+server.listen(5000, function() {
+  logger.info("Example app listening on port 5000!");
+});
+
+const io = socketIO(server);
+
+io.on("connection", socket => {
+  logger.info("a user connected");
+
+  socket.on("change color", color => {
+    console.log("Color Changed to: ", color);
+    io.sockets.emit("change color", color);
+  });
+  socket.on("disconnect", () => {
+    logger.info("a user disconnected");
+  });
 });

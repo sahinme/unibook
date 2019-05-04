@@ -12,6 +12,7 @@ export interface UserDTO {
   college: string;
   faculty: string;
   isGraduated: boolean;
+  followers: number[];
   male?: string;
   phoneNumber?: string;
   birthDate?: Date;
@@ -43,6 +44,8 @@ export class Users implements UserDTO {
   public faculty: string;
   @Column()
   public isGraduated: boolean;
+  @Column("integer", { array: true })
+  public followers: number[];
   @Column()
   public male?: string;
   @Column()

@@ -2,7 +2,6 @@ import { injectable, inject } from "inversify";
 import TYPES from "../types";
 import "reflect-metadata";
 import { UserRepositoryImplDb } from "../repository/UserRepository";
-import { Users, UserDTO } from "../entity/Users";
 import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import config from "../config/config";
