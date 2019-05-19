@@ -1,19 +1,17 @@
 import { injectable } from "inversify";
 import { logger } from "../util/Logger";
-import {
-  createConnection,
-  Connection,
-  Repository,
-  ConnectionOptions
-} from "typeorm";
+import { Repository } from "typeorm";
 import { UserDTO, Users } from "../entity/Users";
 import { BaseRepository } from "./BaseRepository";
+import { DatabaseConnection } from "../database/DatabaseConnection";
 
 @injectable()
-export class UserRepositoryImplDb implements BaseRepository<UserDTO> {
+export class UserRepositoryImplDb extends DatabaseConnection
+  implements BaseRepository<UserDTO> {
   private userRepository: Repository<Users>;
 
   constructor() {
+    super();
     this.connect()
       .then(async connection => {
         this.userRepository = connection.getRepository(Users);
@@ -43,24 +41,5 @@ export class UserRepositoryImplDb implements BaseRepository<UserDTO> {
 
   public async findOneOrFail(username: string): Promise<UserDTO> {
     return await this.userRepository.findOneOrFail({ where: { username } });
-  }
-
-  private connect(): Promise<Connection> {
-    return createConnection(<ConnectionOptions>{
-      type: "postgres",
-      host: "localhost",
-      username: "postgres",
-      password: "salopa44",
-      port: 5432,
-      database: "unibook",
-      extra: {
-        trustedConnection: true
-      },
-      options: {
-        useUTC: true,
-        trustedConnection: true
-      },
-      entities: ["src/entity/**/*.ts"]
-    });
   }
 }

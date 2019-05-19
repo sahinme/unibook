@@ -4,9 +4,7 @@ export class Post {
     private description: string,
     private createdDate: Date,
     private userId: number,
-    private imageBase64?: string,
     private likes?: number,
-    private comments?: string[],
     private shareCount?: number,
     private _id?: number
   ) {}
@@ -34,23 +32,11 @@ export class Post {
   set setUserId(userId: number) {
     this.userId = userId;
   }
-  get getImageBase64(): string {
-    return this.imageBase64;
-  }
-  set setImageBase64(imageBase64: string) {
-    this.imageBase64 = imageBase64;
-  }
   get getLikes(): number {
     return this.likes;
   }
   set setLikes(likes: number) {
     this.likes = likes;
-  }
-  get getComments(): string[] {
-    return this.comments;
-  }
-  set setComments(comments: string[]) {
-    this.comments = comments;
   }
   get getShareCount(): number {
     return this.shareCount;

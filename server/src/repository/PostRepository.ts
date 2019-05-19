@@ -1,25 +1,22 @@
 import { BaseRepository } from "./BaseRepository";
 import { PostDTO, Posts } from "../entity/Posts";
-import {
-  Repository,
-  Connection,
-  createConnection,
-  ConnectionOptions,
-  getRepository
-} from "typeorm";
+import { Repository, getRepository } from "typeorm";
 import { logger } from "../util/Logger";
 import { injectable } from "inversify";
+import { DatabaseConnection } from "../database/DatabaseConnection";
 
 @injectable()
-export class PostRepositoryImplDb implements BaseRepository<PostDTO> {
+export class PostRepositoryImplDb extends DatabaseConnection
+  implements BaseRepository<PostDTO> {
   private postRepository: Repository<Posts>;
 
   constructor() {
+    super();
     this.connect()
       .then(async connection => {
         this.postRepository = await getRepository(Posts);
       })
-      .catch(err => logger.info("Couldnt connec to database", err));
+      .catch(err => logger.info("Couldnt connect to database", err));
   }
 
   public async findAll(): Promise<Array<PostDTO>> {
@@ -38,24 +35,5 @@ export class PostRepositoryImplDb implements BaseRepository<PostDTO> {
   }
   public async delete(id: number): Promise<any> {
     return await this.postRepository.delete(id);
-  }
-
-  private connect(): Promise<Connection> {
-    return createConnection(<ConnectionOptions>{
-      type: "postgres",
-      host: "localhost",
-      username: "postgres",
-      password: "salopa44",
-      port: 5432,
-      database: "unibook",
-      extra: {
-        trustedConnection: true
-      },
-      options: {
-        useUTC: true,
-        trustedConnection: true
-      },
-      entities: ["src/entity/**/*.ts"]
-    });
   }
 }

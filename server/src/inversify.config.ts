@@ -10,6 +10,10 @@ import { PostController } from "./controller/PostController";
 import { PostServiceImpl, PostService } from "./service/PostService";
 import { PostRepositoryImplDb } from "./repository/PostRepository";
 import { SocketIOController } from "./controller/SocketIOController";
+import { CommentService, CommentServiceImpl } from "./service/CommentService";
+import { CommentRepositoryImlDb } from "./repository/CommentRepository";
+import { LikeService, LikeServiceImplDb } from "./service/LikeService";
+import { LikeRepositoryImlDb } from "./repository/LikeRepository";
 
 const container = new Container();
 
@@ -31,6 +35,16 @@ container.bind<PostService>(TYPES.PostService).to(PostServiceImpl);
 container
   .bind<PostRepositoryImplDb>(TYPES.PostRepository)
   .to(PostRepositoryImplDb);
+
+container.bind<CommentService>(TYPES.CommentService).to(CommentServiceImpl);
+container
+  .bind<CommentRepositoryImlDb>(TYPES.CommentRepository)
+  .to(CommentRepositoryImlDb);
+
+container.bind<LikeService>(TYPES.LikeService).to(LikeServiceImplDb);
+container
+  .bind<LikeRepositoryImlDb>(TYPES.LikeRepository)
+  .to(LikeRepositoryImlDb);
 
 container.bind<RegistrableController>(TYPES.Controller).to(SocketIOController);
 

@@ -10,7 +10,7 @@ export class Hashtag {
   set setHashtag(hashtag: string) {
     this.hashtag = hashtag;
   }
-  get getPosyId(): number {
+  get getPostId(): number {
     return this.postId;
   }
   set setPostId(postId: number) {

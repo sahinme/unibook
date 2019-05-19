@@ -55,12 +55,10 @@ export class PostServiceImpl implements PostService {
     return {
       title: post.getTitle,
       description: post.getDescription,
-      createdDate: post.getCreatedDate,
-      userId: post.getUserId,
-      imageBase64: post.getImageBase64,
+      created_date: post.getCreatedDate,
+      user_id: post.getUserId,
       likes: post.getLikes,
-      comments: post.getComments,
-      shareCount: post.getShareCount,
+      share_count: post.getShareCount,
       _id: post.getId
     };
   }
@@ -69,12 +67,10 @@ export class PostServiceImpl implements PostService {
     return new Post(
       postDTO.title,
       postDTO.description,
-      postDTO.createdDate,
-      postDTO.userId,
-      postDTO.imageBase64,
+      postDTO.created_date,
+      postDTO.user_id,
       postDTO.likes,
-      postDTO.comments,
-      postDTO.shareCount,
+      postDTO.share_count,
       postDTO._id
     );
   }

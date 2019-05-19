@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\entity",
+    "\\src\\service"
+  ],
+  "SelectedNode": "\\src\\inversify.config.ts",
+  "PreviewInSolutionExplorer": false
+}

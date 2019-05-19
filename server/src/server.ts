@@ -57,6 +57,11 @@ io.on("connection", socket => {
     console.log("Color Changed to: ", color);
     io.sockets.emit("change color", color);
   });
+
+  socket.on("post title", title => {
+    console.log("Color Changed to: ", title);
+    io.sockets.emit("post title", title);
+  });
   socket.on("disconnect", () => {
     logger.info("a user disconnected");
   });

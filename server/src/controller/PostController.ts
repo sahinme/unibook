@@ -4,10 +4,13 @@ import { RegistrableController } from "./RegisterableController";
 import { PostService } from "../service/PostService";
 import TYPES from "../types";
 import { Post } from "../model/Post";
+import { LikeService } from "../service/LikeService";
+import { Like } from "../model/Like";
 
 @injectable()
 export class PostController implements RegistrableController {
   private postService: PostService;
+  private likeService: LikeService;
 
   constructor(@inject(TYPES.PostService) postService: PostService) {
     this.postService = postService;
@@ -37,17 +40,24 @@ export class PostController implements RegistrableController {
           const post = new Post(
             req.body.title,
             req.body.description,
-            req.body.createdDate,
+            req.body.created_date,
             req.body.userId,
-            req.body.imageBase64,
             req.body.likes,
-            req.body.comments,
             req.body.shareCount
           );
           const createdPost = await this.postService
             .createPost(post)
             .catch(err => next(err));
           res.json(createdPost);
+          const like = new Like(
+            req.body.like_type,
+            req.body.user_id
+            /*             post._id:12,
+             */
+          );
+          const createdLike = await this.likeService
+            .createLike(like)
+            .catch(err => next(err));
         }
       );
 
@@ -79,9 +89,7 @@ export class PostController implements RegistrableController {
             req.body.description,
             req.body.createdDate,
             req.body.userId,
-            req.body.imageBase64,
             req.body.likes,
-            req.body.comments,
             req.body.shareCount,
             req.body.id
           );

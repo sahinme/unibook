@@ -3,12 +3,11 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
 export interface PostDTO {
   title: string;
   description: string;
-  createdDate: Date;
-  userId: number;
-  imageBase64?: string;
+  created_date: Date;
+  user_id: number;
   likes?: number;
   comments?: string[];
-  shareCount?: number;
+  share_count?: number;
   _id?: number;
 }
 
@@ -20,15 +19,13 @@ export class Posts implements PostDTO {
   @Column()
   public description: string;
   @Column("date")
-  public createdDate: Date;
+  public created_date: Date;
   @Column()
-  public userId: number;
+  public user_id: number;
   @Column()
   public likes: number;
-  @Column("text", { array: true })
-  public comments: string[];
   @Column()
-  public shareCount: number;
+  public share_count: number;
   @PrimaryGeneratedColumn()
   public _id: number;
 }
