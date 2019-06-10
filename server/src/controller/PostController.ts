@@ -6,6 +6,7 @@ import TYPES from "../types";
 import { Post } from "../model/Post";
 import { LikeService } from "../service/LikeService";
 import { Like } from "../model/Like";
+import { PostDTO } from "../entity/Posts";
 
 @injectable()
 export class PostController implements RegistrableController {
@@ -45,19 +46,11 @@ export class PostController implements RegistrableController {
             req.body.likes,
             req.body.shareCount
           );
+
           const createdPost = await this.postService
             .createPost(post)
             .catch(err => next(err));
           res.json(createdPost);
-          const like = new Like(
-            req.body.like_type,
-            req.body.user_id
-            /*             post._id:12,
-             */
-          );
-          const createdLike = await this.likeService
-            .createLike(like)
-            .catch(err => next(err));
         }
       );
 
@@ -74,7 +67,7 @@ export class PostController implements RegistrableController {
             .catch(err => next(err));
           res.json(post);
           if (!post) {
-            res.json("user not found");
+            res.json({ msg: "user not found" });
           }
         }
       )

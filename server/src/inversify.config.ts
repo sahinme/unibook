@@ -14,6 +14,8 @@ import { CommentService, CommentServiceImpl } from "./service/CommentService";
 import { CommentRepositoryImlDb } from "./repository/CommentRepository";
 import { LikeService, LikeServiceImplDb } from "./service/LikeService";
 import { LikeRepositoryImlDb } from "./repository/LikeRepository";
+import { HashtagService, HashtagServiceImplDb } from "./service/HashtagService";
+import { HashtagRepositoryImlDb } from "./repository/HashtagRepository";
 
 const container = new Container();
 
@@ -45,6 +47,11 @@ container.bind<LikeService>(TYPES.LikeService).to(LikeServiceImplDb);
 container
   .bind<LikeRepositoryImlDb>(TYPES.LikeRepository)
   .to(LikeRepositoryImlDb);
+
+container.bind<HashtagService>(TYPES.HashtagService).to(HashtagServiceImplDb);
+container
+  .bind<HashtagRepositoryImlDb>(TYPES.HashtagRepository)
+  .to(HashtagRepositoryImlDb);
 
 container.bind<RegistrableController>(TYPES.Controller).to(SocketIOController);
 

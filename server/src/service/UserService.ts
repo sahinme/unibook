@@ -71,13 +71,12 @@ export class UsersServiceImpl implements UserService {
       major: user.getMajor,
       college: user.getCollege,
       isGraduated: user.getIsGraduated,
-      followers: user.getFollowers,
       male: user.getMale,
       phoneNumber: user.getPhoneNumber,
       birthDate: user.getBirthDate,
       faculty: user.getFaculty,
       registerDate: user.getRegisterDate,
-      lastLoginDate: user.getLastLoginDate
+      last_login: user.getLastLoginDate
     };
   }
 
@@ -92,13 +91,12 @@ export class UsersServiceImpl implements UserService {
       userDTO.college,
       userDTO.faculty,
       userDTO.isGraduated,
-      userDTO.followers,
       userDTO.male,
       userDTO.phoneNumber,
       userDTO.birthDate,
       userDTO._id,
       userDTO.registerDate,
-      userDTO.lastLoginDate
+      userDTO.last_login
     );
   }
 }

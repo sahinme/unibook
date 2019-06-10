@@ -11,13 +11,12 @@ export class User {
     private college: string,
     private faculty: string,
     private isGraduated: boolean,
-    private followers: number[],
     private male?: string,
     private phoneNumber?: string,
     private birthDate?: Date,
     private _id?: number,
     private registerDate?: Date,
-    private lastLoginDate?: Date
+    private last_login?: Date
   ) {}
   get getName(): string {
     return this.name;
@@ -128,16 +127,10 @@ export class User {
     this.registerDate = registerDate;
   }
   get getLastLoginDate(): Date {
-    return this.lastLoginDate;
+    return this.last_login;
   }
-  set setLastLoginDate(lastLoginDate: Date) {
-    this.lastLoginDate = lastLoginDate;
-  }
-  get getFollowers(): Array<number> {
-    return this.followers;
-  }
-  set setFollowers(followers: number[]) {
-    this.followers = followers;
+  set setLastLoginDate(last_login: Date) {
+    this.last_login = last_login;
   }
 
   hashPassword() {

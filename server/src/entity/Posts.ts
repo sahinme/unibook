@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  Unique,
+  ManyToMany,
+  JoinTable
+} from "typeorm";
+import { Hashtags } from "./Hashtags";
 
 export interface PostDTO {
   title: string;
@@ -28,4 +36,7 @@ export class Posts implements PostDTO {
   public share_count: number;
   @PrimaryGeneratedColumn()
   public _id: number;
+  @ManyToMany(type => Hashtags, tag => tag.posts)
+  @JoinTable()
+  hashtags: Hashtags[];
 }

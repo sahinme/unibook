@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import { Posts } from "./Posts";
 
 export interface HashtagDTO {
   hashtag: string;
@@ -8,10 +9,10 @@ export interface HashtagDTO {
 
 @Entity()
 export class Hashtags implements HashtagDTO {
-  @Column()
-  public hashtag: string;
-  @Column()
-  public post_id: number;
   @PrimaryGeneratedColumn()
   public _id: number;
+  @Column()
+  public hashtag: string;
+  @ManyToMany(type => Posts, post => post.hashtags)
+  posts: Posts[];
 }

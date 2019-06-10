@@ -12,12 +12,11 @@ export interface UserDTO {
   college: string;
   faculty: string;
   isGraduated: boolean;
-  followers: number[];
   male?: string;
   phoneNumber?: string;
   birthDate?: Date;
   registerDate: Date;
-  lastLoginDate: Date;
+  last_login: Date;
 }
 
 @Entity()
@@ -44,8 +43,6 @@ export class Users implements UserDTO {
   public faculty: string;
   @Column()
   public isGraduated: boolean;
-  @Column("integer", { array: true })
-  public followers: number[];
   @Column()
   public male?: string;
   @Column()
@@ -55,7 +52,7 @@ export class Users implements UserDTO {
   @Column("date")
   public registerDate: Date;
   @Column("date")
-  public lastLoginDate: Date;
+  public last_login: Date;
 
   checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
     return bcrypt.compareSync(unencryptedPassword, this.password);
