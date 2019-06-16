@@ -8,7 +8,7 @@ import { DatabaseConnection } from "../database/DatabaseConnection";
 @injectable()
 export class LikeRepositoryImlDb extends DatabaseConnection
   implements BaseRepository<LikeDTO> {
-  private likeRepository: Repository<LikeDTO>;
+  private likeRepository: Repository<Likes>;
 
   constructor() {
     super();

@@ -4,14 +4,10 @@ import { RegistrableController } from "./RegisterableController";
 import { PostService } from "../service/PostService";
 import TYPES from "../types";
 import { Post } from "../model/Post";
-import { LikeService } from "../service/LikeService";
-import { Like } from "../model/Like";
-import { PostDTO } from "../entity/Posts";
 
 @injectable()
 export class PostController implements RegistrableController {
   private postService: PostService;
-  private likeService: LikeService;
 
   constructor(@inject(TYPES.PostService) postService: PostService) {
     this.postService = postService;
@@ -46,7 +42,6 @@ export class PostController implements RegistrableController {
             req.body.likes,
             req.body.shareCount
           );
-
           const createdPost = await this.postService
             .createPost(post)
             .catch(err => next(err));

@@ -15,6 +15,7 @@ export class PostRepositoryImplDb extends DatabaseConnection
     this.connect()
       .then(async connection => {
         this.postRepository = await getRepository(Posts);
+        await connection.synchronize();
       })
       .catch(err => logger.info("Couldnt connect to database", err));
   }

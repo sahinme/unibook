@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn
+} from "typeorm";
+import { Users } from "./Users";
+import { Posts } from "./Posts";
 
 export interface CommentDTO {
   comment: string;
@@ -10,14 +18,20 @@ export interface CommentDTO {
 
 @Entity()
 export class Comments implements CommentDTO {
-  @Column()
+  @Column({ name: "comment", type: "text" })
   public comment: string;
-  @Column()
-  public post_id: number;
-  @Column("date")
+
+  @ManyToOne(type => Posts)
+  @JoinColumn({ name: "postId" })
+  post: Posts;
+
+  @Column({ name: "createdDate", type: "date", default: "now" })
   public createdDate: Date;
-  @Column()
-  public user_id: number;
-  @PrimaryGeneratedColumn()
+
+  @ManyToOne(type => Users)
+  @JoinColumn({ name: "userId" })
+  user: Users;
+
+  @PrimaryGeneratedColumn({ name: "_id", type: "smallint" })
   public _id: number;
 }

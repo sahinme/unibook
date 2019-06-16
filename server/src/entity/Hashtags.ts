@@ -9,9 +9,9 @@ export interface HashtagDTO {
 
 @Entity()
 export class Hashtags implements HashtagDTO {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: "_id", type: "smallint" })
   public _id: number;
-  @Column()
+  @Column({ name: "hashtag" })
   public hashtag: string;
   @ManyToMany(type => Posts, post => post.hashtags)
   posts: Posts[];

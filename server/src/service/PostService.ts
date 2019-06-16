@@ -56,7 +56,6 @@ export class PostServiceImpl implements PostService {
       title: post.getTitle,
       description: post.getDescription,
       created_date: post.getCreatedDate,
-      user_id: post.getUserId,
       likes: post.getLikes,
       share_count: post.getShareCount,
       _id: post.getId
@@ -68,7 +67,6 @@ export class PostServiceImpl implements PostService {
       postDTO.title,
       postDTO.description,
       postDTO.created_date,
-      postDTO.user_id,
       postDTO.likes,
       postDTO.share_count,
       postDTO._id
