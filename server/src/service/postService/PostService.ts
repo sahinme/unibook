@@ -1,8 +1,8 @@
-import { Post } from "../model/Post";
+import { Post } from "../../model/Post";
 import { inject, injectable } from "inversify";
-import TYPES from "../types";
-import { PostRepositoryImplDb } from "../repository/PostRepository";
-import { PostDTO } from "../entity/Posts";
+import TYPES from "../../types";
+import { PostRepositoryImplDb } from "../../repository/PostRepository";
+import { PostDTO } from "./dto/postDto";
 
 export interface PostService {
   getPosts(): Promise<Array<Post>>;
@@ -53,12 +53,13 @@ export class PostServiceImpl implements PostService {
 
   private toPost(post: Post): PostDTO {
     return {
-      title: post.getTitle,
-      description: post.getDescription,
-      created_date: post.getCreatedDate,
-      likes: post.getLikes,
-      share_count: post.getShareCount,
-      _id: post.getId
+      title: post.title,
+      description: post.description,
+      created_date: post.createdDate,
+      likes: post.likes,
+      share_count: post.shareCount,
+      hashtags: post.hashtags,
+      _id: post._id
     };
   }
 
@@ -69,6 +70,7 @@ export class PostServiceImpl implements PostService {
       postDTO.created_date,
       postDTO.likes,
       postDTO.share_count,
+      postDTO.hashtags,
       postDTO._id
     );
   }

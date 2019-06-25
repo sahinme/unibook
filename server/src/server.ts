@@ -15,6 +15,7 @@ const app: express.Application = express();
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // grabs the Controller from IoC container and registers all the endpoints
 const controllers: RegistrableController[] = container.getAll<

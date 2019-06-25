@@ -1,9 +1,9 @@
 import * as express from "express";
 import { injectable, inject } from "inversify";
 import { RegistrableController } from "./RegisterableController";
-import { PostService } from "../service/PostService";
 import TYPES from "../types";
 import { Post } from "../model/Post";
+import { PostService } from "../service/postService/PostService";
 
 @injectable()
 export class PostController implements RegistrableController {
@@ -38,9 +38,9 @@ export class PostController implements RegistrableController {
             req.body.title,
             req.body.description,
             req.body.created_date,
-            req.body.userId,
             req.body.likes,
-            req.body.shareCount
+            req.body.shareCount,
+            req.body.hashtags
           );
           const createdPost = await this.postService
             .createPost(post)

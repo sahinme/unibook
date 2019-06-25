@@ -7,16 +7,19 @@ import { UserController } from "./controller/UserController";
 import { AuthorizationController } from "./controller/AuthorizationController";
 import { AuthorizationServiceImpl } from "./service/AuthorizationService";
 import { PostController } from "./controller/PostController";
-import { PostServiceImpl, PostService } from "./service/PostService";
 import { PostRepositoryImplDb } from "./repository/PostRepository";
 import { SocketIOController } from "./controller/SocketIOController";
 import { CommentService, CommentServiceImpl } from "./service/CommentService";
 import { CommentRepositoryImlDb } from "./repository/CommentRepository";
 import { LikeService, LikeServiceImplDb } from "./service/LikeService";
 import { LikeRepositoryImlDb } from "./repository/LikeRepository";
-import { HashtagService, HashtagServiceImplDb } from "./service/HashtagService";
+import {
+  PostService,
+  PostServiceImpl
+} from "./service/postService/PostService";
+/* import { HashtagService, HashtagServiceImplDb } from "./service/HashtagService";
 import { HashtagRepositoryImlDb } from "./repository/HashtagRepository";
-
+ */
 const container = new Container();
 
 container.bind<RegistrableController>(TYPES.Controller).to(UserController);
@@ -48,10 +51,10 @@ container
   .bind<LikeRepositoryImlDb>(TYPES.LikeRepository)
   .to(LikeRepositoryImlDb);
 
-container.bind<HashtagService>(TYPES.HashtagService).to(HashtagServiceImplDb);
+/* container.bind<HashtagService>(TYPES.HashtagService).to(HashtagServiceImplDb);
 container
   .bind<HashtagRepositoryImlDb>(TYPES.HashtagRepository)
-  .to(HashtagRepositoryImlDb);
+  .to(HashtagRepositoryImlDb); */
 
 container.bind<RegistrableController>(TYPES.Controller).to(SocketIOController);
 

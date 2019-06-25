@@ -1,9 +1,10 @@
 import { BaseRepository } from "./BaseRepository";
-import { PostDTO, Posts } from "../entity/Posts";
+import { Posts } from "../entity/Posts";
 import { Repository, getRepository } from "typeorm";
 import { logger } from "../util/Logger";
 import { injectable } from "inversify";
 import { DatabaseConnection } from "../database/DatabaseConnection";
+import { PostDTO } from "../service/postService/dto/postDto";
 
 @injectable()
 export class PostRepositoryImplDb extends DatabaseConnection
@@ -31,9 +32,11 @@ export class PostRepositoryImplDb extends DatabaseConnection
   public async update(postDTO: PostDTO): Promise<PostDTO> {
     return await this.postRepository.save(postDTO);
   }
+
   public async find(id: number): Promise<PostDTO> {
     return await this.postRepository.findOne(id);
   }
+
   public async delete(id: number): Promise<any> {
     return await this.postRepository.delete(id);
   }

@@ -1,4 +1,4 @@
-import { inject, injectable } from "inversify";
+/* import { inject, injectable } from "inversify";
 import TYPES from "../types";
 import { Hashtag } from "../model/Hashtag";
 import { HashtagDTO } from "../entity/Hashtags";
@@ -67,3 +67,4 @@ export class HashtagServiceImplDb implements HashtagService {
     return new Hashtag(hashtagDTO.hashtag, hashtagDTO.post_id, hashtagDTO._id);
   }
 }
+ */

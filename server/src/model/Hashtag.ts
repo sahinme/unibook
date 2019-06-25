@@ -1,4 +1,4 @@
-export class Hashtag {
+/* export class Hashtag {
   constructor(
     private hashtag: string,
     private postId?: number,
@@ -23,3 +23,4 @@ export class Hashtag {
     this._id = _id;
   }
 }
+ */

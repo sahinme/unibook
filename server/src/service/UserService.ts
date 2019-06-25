@@ -62,21 +62,21 @@ export class UsersServiceImpl implements UserService {
 
   private toUser(user: User): UserDTO {
     return {
-      name: user.getName,
-      surname: user.getSurname,
-      _id: user.getId,
-      username: user.getUsername,
-      password: user.getPassword,
-      email: user.getEmail,
-      major: user.getMajor,
-      college: user.getCollege,
-      isGraduated: user.getIsGraduated,
-      male: user.getMale,
-      phoneNumber: user.getPhoneNumber,
-      birthDate: user.getBirthDate,
-      faculty: user.getFaculty,
-      registerDate: user.getRegisterDate,
-      last_login: user.getLastLoginDate
+      name: user.name,
+      surname: user.surname,
+      _id: user._id,
+      username: user.username,
+      password: user.password,
+      email: user.email,
+      major: user.major,
+      college: user.college,
+      isGraduated: user.isGraduated,
+      male: user.male,
+      phoneNumber: user.phoneNumber,
+      birthDate: user.birthDate,
+      faculty: user.faculty,
+      registerDate: user.registerDate,
+      last_login: user.last_login
     };
   }
 
