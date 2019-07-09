@@ -4,6 +4,7 @@ import { RegistrableController } from "./RegisterableController";
 import TYPES from "../types";
 import { Post } from "../model/Post";
 import { PostService } from "../service/postService/PostService";
+import { PostDTO } from "../service/postService/dto/postDto";
 
 @injectable()
 export class PostController implements RegistrableController {
@@ -34,14 +35,12 @@ export class PostController implements RegistrableController {
           res: express.Response,
           next: express.NextFunction
         ) => {
-          const post = new Post(
-            req.body.title,
-            req.body.description,
-            req.body.created_date,
-            req.body.likes,
-            req.body.shareCount,
-            req.body.hashtags
-          );
+          const post = new PostDTO();
+          post.description = req.body.description;
+          post.hashtags = req.body.hashtags;
+          post.likes = 0;
+          post.share_count = 0;
+          post.title = req.body.title;
           const createdPost = await this.postService
             .createPost(post)
             .catch(err => next(err));
@@ -72,15 +71,12 @@ export class PostController implements RegistrableController {
           res: express.Response,
           next: express.NextFunction
         ) => {
-          const post = new Post(
-            req.body.title,
-            req.body.description,
-            req.body.createdDate,
-            req.body.userId,
-            req.body.likes,
-            req.body.shareCount,
-            req.body.id
-          );
+          const post = new PostDTO();
+          post.description = req.body.description;
+          post.hashtags = req.body.hashtags;
+          post.likes = 0;
+          post.share_count = 0;
+          post.title = req.body.title;
           const updatedPost = await this.postService
             .updatePost(post)
             .catch(err => next(err));

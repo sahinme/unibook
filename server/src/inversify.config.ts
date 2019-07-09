@@ -17,9 +17,7 @@ import {
   PostService,
   PostServiceImpl
 } from "./service/postService/PostService";
-/* import { HashtagService, HashtagServiceImplDb } from "./service/HashtagService";
-import { HashtagRepositoryImlDb } from "./repository/HashtagRepository";
- */
+
 const container = new Container();
 
 container.bind<RegistrableController>(TYPES.Controller).to(UserController);
@@ -50,11 +48,6 @@ container.bind<LikeService>(TYPES.LikeService).to(LikeServiceImplDb);
 container
   .bind<LikeRepositoryImlDb>(TYPES.LikeRepository)
   .to(LikeRepositoryImlDb);
-
-/* container.bind<HashtagService>(TYPES.HashtagService).to(HashtagServiceImplDb);
-container
-  .bind<HashtagRepositoryImlDb>(TYPES.HashtagRepository)
-  .to(HashtagRepositoryImlDb); */
 
 container.bind<RegistrableController>(TYPES.Controller).to(SocketIOController);
 

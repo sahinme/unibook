@@ -1,4 +1,5 @@
 import * as bcrypt from "bcryptjs";
+import { Majors } from "../entity/Majors";
 
 export class User {
   constructor(
@@ -7,9 +8,7 @@ export class User {
     public username: string,
     public password: string,
     public email: string,
-    public major: string,
-    public college: string,
-    public faculty: string,
+    public major: Majors,
     public isGraduated: boolean,
     public male?: string,
     public phoneNumber?: string,

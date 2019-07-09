@@ -4,10 +4,12 @@ import {
   Column,
   Unique,
   ManyToOne,
-  JoinColumn
+  JoinColumn,
+  OneToMany
 } from "typeorm";
 import { Users } from "./Users";
 import { PostDTO } from "../service/postService/dto/postDto";
+import { Comments } from "./Comments";
 
 @Entity("posts")
 @Unique(["_id"])
@@ -24,16 +26,19 @@ export class Posts implements PostDTO {
   @Column("text", { array: true, nullable: true })
   public hashtags: string[];
 
-  @Column({ name: "created_date", type: "date", default: "now" })
+  @Column({ name: "createdDate", type: "date", default: "now" })
   public created_date: Date;
 
   @Column({ name: "likes", type: "integer" })
   public likes: number;
 
-  @Column({ name: "share_count", type: "integer" })
+  @Column({ name: "shareCount", type: "integer" })
   public share_count: number;
 
   @ManyToOne(type => Users, user => user.posts)
-  @JoinColumn({ name: "user_id" })
+  @JoinColumn({ name: "userId" })
   user: Users;
+
+  @OneToMany(type => Comments, comments => comments.post)
+  comments: Comments[];
 }

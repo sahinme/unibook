@@ -3,32 +3,20 @@ import {
   Column,
   PrimaryGeneratedColumn,
   Unique,
-  OneToMany
+  OneToMany,
+  ManyToOne,
+  JoinColumn
 } from "typeorm";
 import * as bcrypt from "bcryptjs";
 import { Posts } from "./Posts";
-
-export interface UserDTO {
-  _id?: number;
-  name: string;
-  surname: string;
-  username: string;
-  password: string;
-  email: string;
-  major: string;
-  college: string;
-  faculty: string;
-  isGraduated: boolean;
-  male?: string;
-  phoneNumber?: string;
-  birthDate?: Date;
-  registerDate: Date;
-  last_login: Date;
-}
+import { Colleges } from "./Colleges";
+import { Faculties } from "./Faculties";
+import { Majors } from "./Majors";
+import { Cities } from "./Cities";
 
 @Entity()
 @Unique(["username"])
-export class Users implements UserDTO {
+export class Users {
   @PrimaryGeneratedColumn({ name: "_id", type: "smallint" })
   public _id: number;
 
@@ -47,14 +35,9 @@ export class Users implements UserDTO {
   @Column({ name: "email", length: 100 })
   public email: string;
 
-  @Column({ name: "major" })
-  public major: string;
-
-  @Column({ name: "college" })
-  public college: string;
-
-  @Column({ name: "faculty" })
-  public faculty: string;
+  @ManyToOne(type => Majors, majors => majors.users)
+  @JoinColumn({ name: "majorId" })
+  major: Majors;
 
   @Column({ name: "isGraduated", type: "boolean" })
   public isGraduated: boolean;

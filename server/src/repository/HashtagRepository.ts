@@ -1,8 +1,7 @@
-import { BaseRepository } from "./BaseRepository";
+/* import { BaseRepository } from "./BaseRepository";
 import { Repository, getRepository } from "typeorm";
 import { logger } from "../util/Logger";
 import { injectable } from "inversify";
-import { HashtagDTO, Hashtags } from "../entity/Hashtags";
 import { DatabaseConnection } from "../database/DatabaseConnection";
 
 @injectable()
@@ -37,3 +36,4 @@ export class HashtagRepositoryImlDb extends DatabaseConnection
     return await this.hashtagRepository.delete(id);
   }
 }
+ */

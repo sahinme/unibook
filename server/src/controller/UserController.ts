@@ -2,9 +2,9 @@ import * as express from "express";
 import { injectable, inject } from "inversify";
 import TYPES from "../types";
 import { RegistrableController } from "./RegisterableController";
-import { UserService } from "../service/UserService";
 import { User } from "../model/User";
 import { checkJwt } from "../middlewares/checkJwt";
+import { UserService } from "../service/UserService";
 
 @injectable()
 export class UserController implements RegistrableController {
@@ -42,8 +42,6 @@ export class UserController implements RegistrableController {
             req.body.password,
             req.body.email,
             req.body.major,
-            req.body.college,
-            req.body.faculty,
             req.body.isGraduated,
             req.body.male,
             req.body.phoneNumber,
@@ -88,9 +86,10 @@ export class UserController implements RegistrableController {
             req.body.username,
             req.body.password,
             req.body.email,
-            req.body.major,
-            req.body.college,
-            req.body.faculty,
+            req.body.majorId,
+            /*   req.body.collegeId,
+            req.body.facultyId,
+            req.body.cityId, */
             req.body.isGraduated,
             req.body.followers,
             req.body.male,

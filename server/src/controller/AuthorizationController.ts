@@ -2,8 +2,6 @@ import * as express from "express";
 import { injectable, inject } from "inversify";
 import TYPES from "../types";
 import { RegistrableController } from "./RegisterableController";
-import { UserService } from "../service/UserService";
-import { User } from "../model/User";
 import { AuthorizationServiceImpl } from "../service/AuthorizationService";
 
 @injectable()

@@ -1,9 +1,10 @@
 import { injectable } from "inversify";
 import { logger } from "../util/Logger";
 import { Repository } from "typeorm";
-import { UserDTO, Users } from "../entity/Users";
+import { Users } from "../entity/Users";
 import { BaseRepository } from "./BaseRepository";
 import { DatabaseConnection } from "../database/DatabaseConnection";
+import { UserDTO } from "../service/userService/dto/userDto";
 
 @injectable()
 export class UserRepositoryImplDb extends DatabaseConnection

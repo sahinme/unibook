@@ -10,7 +10,7 @@ export class DatabaseConnection {
       username: "postgres",
       password: "salopa44",
       port: 5432,
-      database: "unibookDev",
+      database: "unibookdev",
       extra: {
         trustedConnection: true
       },

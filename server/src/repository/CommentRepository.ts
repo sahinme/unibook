@@ -8,7 +8,7 @@ import { DatabaseConnection } from "../database/DatabaseConnection";
 @injectable()
 export class CommentRepositoryImlDb extends DatabaseConnection
   implements BaseRepository<CommentDTO> {
-  private commentRepository: Repository<CommentDTO>;
+  private commentRepository: Repository<Comments>;
 
   constructor() {
     super();

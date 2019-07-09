@@ -3,7 +3,7 @@ import TYPES from "../types";
 import "reflect-metadata";
 import { User } from "../model/User";
 import { UserRepositoryImplDb } from "../repository/UserRepository";
-import { UserDTO } from "../entity/Users";
+import { UserDTO } from "./userService/dto/userDto";
 
 export interface UserService {
   getUsers(): Promise<Array<User>>;
@@ -69,12 +69,10 @@ export class UsersServiceImpl implements UserService {
       password: user.password,
       email: user.email,
       major: user.major,
-      college: user.college,
       isGraduated: user.isGraduated,
       male: user.male,
       phoneNumber: user.phoneNumber,
       birthDate: user.birthDate,
-      faculty: user.faculty,
       registerDate: user.registerDate,
       last_login: user.last_login
     };
@@ -88,8 +86,6 @@ export class UsersServiceImpl implements UserService {
       userDTO.password,
       userDTO.email,
       userDTO.major,
-      userDTO.college,
-      userDTO.faculty,
       userDTO.isGraduated,
       userDTO.male,
       userDTO.phoneNumber,
