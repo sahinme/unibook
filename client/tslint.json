@@ -1,11 +1,22 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [],
   "rules": {
-    "ordered-imports": [false],
-    "grouped-imports": [false],
-    "jsx-no-lambda": false
+    "ordered-imports": false,
+    "grouped-imports": false,
+    "jsx-no-lambda": false,
+    "no-empty": false,
+    "interface-name": [false, "never"],
+    "prefer-const": false,
+    "no-debugger": false,
+    "no-console": false
+
   },
   "linterOptions": {
+    "prefer-const": ["error", {
+      "destructuring": "any",
+      "ignoreReadBeforeAssign": false,
+      "debug": true
+    }],
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",

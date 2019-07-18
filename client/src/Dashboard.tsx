@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Component } from "react";
 import * as socketIOClient from "socket.io-client";
 import Button from "@material-ui/core/Button";
+import tokenAuthService from "./services/tokenAuth/tokenAuthService";
+import PrimarySearchAppBar from "./components/Header";
 
 export interface IDashboardState {
   endpoint: string;
@@ -28,10 +29,24 @@ class Dashboard extends React.Component<{}, IDashboardState> {
     socket.on("change color", (color: string) => {
       document.body.style.backgroundColor = color;
     });
+
+    let data = {
+      password: "vvvv",
+      username: "vvvv"
+    };
     return (
       <div style={{ textAlign: "center" }}>
+        <PrimarySearchAppBar />
         <Button onClick={() => this.send()}>Change Color</Button>
 
+        <Button
+          color="primary"
+          variant="contained"
+          id="blue"
+          onClick={() => tokenAuthService.authenticate(data)}
+        >
+          auth
+        </Button>
         <Button
           color="primary"
           variant="contained"
