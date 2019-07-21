@@ -1,25 +1,35 @@
 import LoadableComponent from "../Loadable";
+import AppLayout from "../Layout/AppLayout";
 
 export const appRouters: any = [
   {
     path: "/",
     exact: true,
     name: "home",
-    title: "AnaSayfa",
-    icon: "fa fa-home",
+    title: "",
+    icon: "",
     color: "primary",
-    component: LoadableComponent(() => import("../../components/Layout/index")),
+    component: AppLayout,
     isLayout: true,
     showInMenu: false
   },
   {
-    path: "/users",
-    title: "Bildirimler",
+    path: "/anasayfa",
+    title: "Ana Sayfa",
     name: "user",
+    icon: "fa fa-home",
+    color: "primary",
+    showInMenu: true,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+  },
+  {
+    path: "/bildirimler",
+    title: "Bildirimler",
+    name: "bildirimler",
     icon: "far fa-bell",
     color: "primary",
-    showInMenu: true
-    /* component: LoadableComponent(() => import('../../scenes/Users')),*/
+    showInMenu: true,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
   },
   {
     path: "/roles",
@@ -54,7 +64,7 @@ export const appRouters: any = [
     title: "Çıkış Yap",
     name: "logout",
     icon: "fas fa-sign-out-alt",
-    showInMenu: false
+    showInMenu: true
     /* component: LoadableComponent(() => import('../../components/Logout')) */
   }
 ];

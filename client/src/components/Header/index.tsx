@@ -21,20 +21,31 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Sidebar } from "../Sidebar";
+import clsx from "clsx";
 
+const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
       flexGrow: 1
     },
-    menuButton: {
-      marginRight: theme.spacing(2)
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(["width", "margin"], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      })
     },
-    title: {
-      display: "none",
-      [theme.breakpoints.up("sm")]: {
-        display: "block"
-      }
+    appBarShift: {
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(["width", "margin"], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen
+      })
+    },
+    menuButton: {
+      marginRight: 36
     },
     search: {
       position: "relative",
@@ -86,7 +97,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function PrimarySearchAppBar() {
+interface IHeaderProps {
+  history: any;
+  path: any;
+}
+
+export default function PrimarySearchAppBar(props: IHeaderProps) {
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
@@ -94,7 +110,6 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl
   ] = React.useState<null | HTMLElement>(null);
   const classes = useStyles();
-  const theme = useTheme();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -183,7 +198,10 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
         <Toolbar>
           <IconButton
             onClick={handleDrawerOpen}
@@ -194,7 +212,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography variant="h6" noWrap>
             Universty
           </Typography>
           <div className={classes.search}>
@@ -246,7 +264,12 @@ export default function PrimarySearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <Sidebar open={open} handleDrawerClose={handleDrawerClose} />
+      <Sidebar
+        path={props.path}
+        history={props.history}
+        open={open}
+        handleDrawerClose={handleDrawerClose}
+      />
       {renderMobileMenu}
       {renderMenu}
     </div>

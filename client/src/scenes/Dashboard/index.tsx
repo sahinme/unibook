@@ -1,8 +1,15 @@
 import * as React from "react";
+import PostCard from "src/components/PostCard";
+
+export default function Dashboard() {
+  return <PostCard />;
+}
+
+/* import * as React from "react";
 import * as socketIOClient from "socket.io-client";
 import Button from "@material-ui/core/Button";
-import tokenAuthService from "./services/tokenAuth/tokenAuthService";
-import PrimarySearchAppBar from "./components/Header";
+import tokenAuthService from "../../services/tokenAuth/tokenAuthService";
+import PrimarySearchAppBar from "../../components/Header";
 
 export interface IDashboardState {
   endpoint: string;
@@ -36,7 +43,6 @@ class Dashboard extends React.Component<{}, IDashboardState> {
     };
     return (
       <div style={{ textAlign: "center" }}>
-        <PrimarySearchAppBar />
         <Button onClick={() => this.send()}>Change Color</Button>
 
         <Button
@@ -69,3 +75,4 @@ class Dashboard extends React.Component<{}, IDashboardState> {
 }
 
 export default Dashboard;
+ */

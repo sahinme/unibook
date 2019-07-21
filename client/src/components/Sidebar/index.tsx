@@ -22,6 +22,8 @@ import { loadCSS } from "fg-loadcss";
 interface ISidebarProps {
   open: boolean;
   handleDrawerClose(): void;
+  history: any;
+  path: any;
 }
 
 const drawerWidth = 240;
@@ -89,16 +91,22 @@ export const Sidebar = (props: ISidebarProps) => {
       </div>
       <Divider />
       <List>
-        {appRouters.map((route: any, index: number) => {
-          return (
-            <ListItem button key={route.path}>
-              <ListItemIcon>
-                <Icon className={route.icon} color={route.color} />
-              </ListItemIcon>
-              <ListItemText primary={route.title} />
-            </ListItem>
-          );
-        })}
+        {appRouters
+          .filter((item: any) => !item.isLayout && item.showInMenu)
+          .map((route: any, index: number) => {
+            return (
+              <ListItem
+                onClick={() => props.history.push(route.path)}
+                button
+                key={route.path}
+              >
+                <ListItemIcon>
+                  <Icon className={route.icon} color={route.color} />
+                </ListItemIcon>
+                <ListItemText primary={route.title} />
+              </ListItem>
+            );
+          })}
       </List>
     </Drawer>
   );

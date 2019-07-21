@@ -69,7 +69,7 @@ class Utils {
   };
 
   getRoute = (path: string): any => {
-    return routers.filter((route: any) => route.path === path)[0];
+    return routers.filter(route => route.path === path)[0];
   };
 }
 

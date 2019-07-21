@@ -4,19 +4,17 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import { Switch, Route, Redirect } from "react-router";
+import { Switch, Route, Redirect, withRouter } from "react-router";
 import { appRouters } from "../Router/router.config";
+import PrimarySearchAppBar from "../Header";
+import DocumentTitle from "react-document-title";
+import utils from "src/utils/utils";
+import clsx from "clsx";
 
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Built with love by the "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </Link>
-      {" team."}
-    </Typography>
-  );
+interface IProps {
+  history: any;
+  pathname: any;
+  location: { pathname };
 }
 
 const drawerWidth = 240;
@@ -24,40 +22,6 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
-  },
-  toolbar: {
-    paddingRight: 24 // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginRight: 36
-  },
-  menuButtonHidden: {
-    display: "none"
-  },
-  title: {
-    flexGrow: 1
   },
   drawerPaper: {
     position: "relative",
@@ -100,26 +64,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AppLayout() {
+export default function AppLayout(props: any) {
   const classes = useStyles();
-  /*   const [open setOpen] = React.useState(true);
-   */
-  /*   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
- */
-  const { path } = this.props.match;
-  return (
-    <div className={classes.root}>
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const layout = (
+    <div>
       <CssBaseline />
-      {/*       <Sidebar open={true} path={path} history={history} />
-       */}{" "}
-      <main className={classes.content}>
+      <PrimarySearchAppBar path={props.match.path} history={props.history} />
+      <main>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth="lg">
           <Switch>
             {appRouters
               .filter((item: any) => !item.isLayout)
@@ -128,14 +83,17 @@ export default function AppLayout() {
                   key={index}
                   path={route.path}
                   component={route.component}
-                  permission={route.permission}
                 />
               ))}
-            <Redirect from="/" to="/dashboard" />
+            <Redirect from="/" to="/anasayfa" />
           </Switch>
         </Container>
-        <MadeWithLove />
       </main>
     </div>
+  );
+  return (
+    <DocumentTitle title={utils.getPageTitle(props.location.pathname)}>
+      {layout}
+    </DocumentTitle>
   );
 }

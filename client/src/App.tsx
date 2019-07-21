@@ -1,15 +1,10 @@
 import * as React from "react";
 import "./App.css";
-import Dashboard from "./Dashboard";
+import Router from "./components/Router";
 
 class App extends React.Component {
   public render() {
-    return (
-      <div className="App">
-        <header className="App-header" />
-        <Dashboard />
-      </div>
-    );
+    return <Router />;
   }
 }
 

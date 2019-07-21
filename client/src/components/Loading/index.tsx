@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Loading() {
   const classes = useStyles();
   const [progress, setProgress] = React.useState(0);
-
   React.useEffect(() => {
     function tick() {
       // reset when reaching 100%
