@@ -1,15 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
-import { Switch, Route, Redirect, withRouter } from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import { appRouters } from "../Router/router.config";
 import PrimarySearchAppBar from "../Header";
 import DocumentTitle from "react-document-title";
 import utils from "src/utils/utils";
-import clsx from "clsx";
 
 interface IProps {
   history: any;
@@ -66,7 +63,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function AppLayout(props: any) {
   const classes = useStyles();
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const layout = (
     <div>

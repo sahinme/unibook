@@ -1,78 +1,29 @@
 import * as React from "react";
 import PostCard from "src/components/PostCard";
+import { Grid } from "@material-ui/core";
+import CreatePost from "src/components/CreatePost";
+import OpenedSidebar from "src/components/OpenedSidebar";
 
 export default function Dashboard() {
-  return <PostCard />;
+  return (
+    <Grid container spacing={3}>
+      <Grid item xs>
+        <OpenedSidebar />
+      </Grid>
+      <Grid item xs={6}>
+        <CreatePost />
+        <PostCard
+          postDescription="asdasdsadasd"
+          likes={20}
+          postContentPath="https://cn.opendesktop.org/img/e/c/2/3/b016ec2bcb8eb01cd58bf56b1f929e5f6080.jpg"
+          userImagePath="https://pbs.twimg.com/profile_images/1133530124186476545/Od_DxKfq_bigger.jpg"
+          createdDate="2 saat once"
+          userName="freeadmiral"
+        />
+      </Grid>
+      <Grid item xs>
+        xs
+      </Grid>
+    </Grid>
+  );
 }
-
-/* import * as React from "react";
-import * as socketIOClient from "socket.io-client";
-import Button from "@material-ui/core/Button";
-import tokenAuthService from "../../services/tokenAuth/tokenAuthService";
-import PrimarySearchAppBar from "../../components/Header";
-
-export interface IDashboardState {
-  endpoint: string;
-  color: string;
-}
-
-class Dashboard extends React.Component<{}, IDashboardState> {
-  public state: IDashboardState = {
-    color: "white",
-    endpoint: "localhost:5000"
-  };
-
-  public send = () => {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.emit("change color", this.state.color);
-  };
-
-  public setColor = (color: string) => {
-    this.setState({ color });
-  };
-
-  public render() {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.on("change color", (color: string) => {
-      document.body.style.backgroundColor = color;
-    });
-
-    let data = {
-      password: "vvvv",
-      username: "vvvv"
-    };
-    return (
-      <div style={{ textAlign: "center" }}>
-        <Button onClick={() => this.send()}>Change Color</Button>
-
-        <Button
-          color="primary"
-          variant="contained"
-          id="blue"
-          onClick={() => tokenAuthService.authenticate(data)}
-        >
-          auth
-        </Button>
-        <Button
-          color="primary"
-          variant="contained"
-          id="blue"
-          onClick={() => this.setColor("blue")}
-        >
-          Blue
-        </Button>
-        <Button
-          id="red"
-          variant="contained"
-          color="secondary"
-          onClick={() => this.setColor("red")}
-        >
-          Red
-        </Button>
-      </div>
-    );
-  }
-}
-
-export default Dashboard;
- */

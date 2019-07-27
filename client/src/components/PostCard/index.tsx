@@ -5,35 +5,21 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { loadCSS } from "fg-loadcss";
-import { Icon } from "@material-ui/core";
+import { Icon, Grid } from "@material-ui/core";
+import "./index.css";
+import PostCardMenu from "./components/PostCardMenu";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    card: {
-      maxWidth: 500
-    },
     media: {
       height: 0,
       paddingTop: "56.25%" // 16:9
-    },
-    expand: {
-      transform: "rotate(0deg)",
-      marginLeft: "auto",
-      transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest
-      })
-    },
-    expandOpen: {
-      transform: "rotate(180deg)"
     },
     avatar: {
       backgroundColor: red[500]
@@ -41,8 +27,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function PostCard() {
+interface IPostCardProps {
+  postDescription: string;
+  userName: string;
+  createdDate: string;
+  userImagePath: string;
+  postContentPath: string;
+  likes: number;
+}
+
+export default function PostCard(props: IPostCardProps) {
   const classes = useStyles();
+
   React.useEffect(() => {
     loadCSS(
       "https://use.fontawesome.com/releases/v5.1.0/css/all.css",
@@ -51,43 +47,50 @@ export default function PostCard() {
   }, []);
 
   return (
-    <Card className={classes.card}>
+    <Card>
       <CardHeader
         avatar={
-          <Avatar aria-label="Recipe" className={classes.avatar}>
-            R
-          </Avatar>
+          <Avatar
+            aria-label="Recipe"
+            src={props.userImagePath}
+            className={classes.avatar}
+          />
         }
-        action={
-          <IconButton aria-label="Settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        action={<PostCardMenu />}
+        title={props.userName}
+        subheader={props.createdDate}
       />
-      <CardMedia
-        className={classes.media}
-        image="https://cn.opendesktop.org/img/e/c/2/3/b016ec2bcb8eb01cd58bf56b1f929e5f6080.jpg"
-        title="Paella dish"
-      />
+      <CardMedia className={classes.media} image={props.postContentPath} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {props.postDescription}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="Add to favorites">
-          <Icon className="far fa-comment-dots" />
-        </IconButton>
-        <IconButton aria-label="Share">
-          <ShareIcon />
-        </IconButton>
+        <Grid item xs={3}>
+          <IconButton aria-label="Add to favorites">
+            <Icon className="far fa-heart" />
+          </IconButton>
+          <span className="icons-count">{props.likes}</span>
+        </Grid>
+        <Grid item xs={3}>
+          <IconButton aria-label="Comment">
+            <Icon className="far fa-comment-dots" />
+          </IconButton>
+          <span className="icons-count">21</span>
+        </Grid>
+        <Grid item xs={3}>
+          <IconButton aria-label="Share">
+            <ShareIcon />
+          </IconButton>
+          <span className="icons-count">21</span>
+        </Grid>
+        <Grid item xs={3}>
+          <IconButton aria-label="Repost">
+            <Icon className="fas fa-retweet" />
+          </IconButton>
+          <span className="icons-count">21</span>
+        </Grid>
       </CardActions>
     </Card>
   );
