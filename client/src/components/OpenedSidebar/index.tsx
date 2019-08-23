@@ -15,13 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ISidebarProps {
-  open: boolean;
-  handleDrawerClose(): void;
-  history: any;
-  path: any;
+  open?: boolean;
+  /*   handleDrawerClose(): void;
+   */ history: any;
+  path?: any;
 }
 
-export default function OpenedSidebar(props: any) {
+export default function OpenedSidebar(props: ISidebarProps) {
   const classes = useStyles();
 
   return (

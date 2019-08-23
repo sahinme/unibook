@@ -46,9 +46,8 @@ export const appRouters: any = [
     name: "tenant",
     icon: "far fa-user",
     color: "primary",
-    showInMenu: true
-    /* component: LoadableComponent(() => import('../../scenes/Tenants')),
-     */
+    showInMenu: true,
+    component: LoadableComponent(() => import("../ProfileCard"))
   },
   {
     path: "/about",
