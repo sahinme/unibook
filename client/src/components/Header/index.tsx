@@ -22,6 +22,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Sidebar } from "../Sidebar";
 import clsx from "clsx";
+import { Grid } from "@material-ui/core";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
@@ -93,6 +94,12 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up("md")]: {
         display: "none"
       }
+    },
+    title: {
+      display: "none",
+      [theme.breakpoints.up("sm")]: {
+        display: "block"
+      }
     }
   })
 );
@@ -125,14 +132,6 @@ export default function PrimarySearchAppBar(props: IHeaderProps) {
   function handleMenuClose() {
     setAnchorEl(null);
     handleMobileMenuClose();
-  }
-
-  function handleDrawerOpen() {
-    setOpen(true);
-  }
-
-  function handleDrawerClose() {
-    setOpen(false);
   }
 
   function handleMobileMenuOpen(event: React.MouseEvent<HTMLElement>) {
@@ -196,24 +195,37 @@ export default function PrimarySearchAppBar(props: IHeaderProps) {
     </Menu>
   );
 
+  const primaryMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id="sdas"
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton aria-label="Show 4 new mails" color="inherit">
+          <MailIcon />
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton aria-label="Show 11 new notifications" color="inherit">
+          <NotificationsIcon />
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+    </Menu>
+  );
+
   return (
     <div className={classes.grow}>
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
+      <AppBar position="static">
         <Toolbar>
-          <IconButton
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Universty
+          <Typography className={classes.title} variant="h6" noWrap>
+            Material-UI
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -225,24 +237,40 @@ export default function PrimarySearchAppBar(props: IHeaderProps) {
                 root: classes.inputRoot,
                 input: classes.inputInput
               }}
-              inputProps={{ "aria-label": "Search" }}
+              inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <div className={classes.grow} />
+          <div className={classes.grow}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Grid item xs={12}>
+                <Grid container justify="center" spacing={2}>
+                  <Grid item>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <MailIcon />
+                      <p>sadsa</p>
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <p>sadsa</p>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="Show 4 new mails" color="inherit">
+            <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="Show 17 new notifications" color="inherit">
+            <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
             <IconButton
               edge="end"
-              aria-label="Account of current user"
+              aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
@@ -253,7 +281,7 @@ export default function PrimarySearchAppBar(props: IHeaderProps) {
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
-              aria-label="Show more"
+              aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
@@ -264,12 +292,6 @@ export default function PrimarySearchAppBar(props: IHeaderProps) {
           </div>
         </Toolbar>
       </AppBar>
-      <Sidebar
-        path={props.path}
-        history={props.history}
-        open={open}
-        handleDrawerClose={handleDrawerClose}
-      />
       {renderMobileMenu}
       {renderMenu}
     </div>

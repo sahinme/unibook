@@ -15,45 +15,54 @@ export const appRouters: any = [
   },
   {
     path: "/anasayfa",
-    title: "Ana Sayfa",
-    name: "user",
-    icon: "fa fa-home",
+    title: "Ders Notları",
+    name: "notes",
+    icon: "far fa-paper-plane",
+    color: "primary",
+    showInMenu: false,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+  },
+  {
+    path: "/notes",
+    title: "Ders Notları",
+    name: "notes",
+    icon: "far fa-paper-plane",
     color: "primary",
     showInMenu: true,
     component: LoadableComponent(() => import("../../scenes/Dashboard"))
   },
   {
     path: "/bildirimler",
-    title: "Bildirimler",
-    name: "bildirimler",
-    icon: "far fa-bell",
+    title: "Staj Bul",
+    name: "internships",
+    icon: "far fa-address-card",
     color: "primary",
     showInMenu: true,
     component: LoadableComponent(() => import("../../scenes/Dashboard"))
   },
   {
-    path: "/roles",
-    title: "Mesajlar",
+    path: "/kulüpler",
+    title: "Kulüpler",
     name: "role",
-    icon: "far fa-envelope",
+    icon: "fas fa-users",
     color: "primary",
     showInMenu: true
     /* component: LoadableComponent(() => import('../../scenes/Roles')),*/
   },
   {
-    path: "/tenants",
-    title: "Profil",
-    name: "tenant",
-    icon: "far fa-user",
+    path: "/unıversiteler",
+    title: "Üniversiteler",
+    name: "colleges",
+    icon: "fas fa-university",
     color: "primary",
     showInMenu: true,
     component: LoadableComponent(() => import("../ProfileCard"))
   },
   {
-    path: "/about",
-    title: "Ayarlar",
-    name: "about",
-    icon: "fas fa-cog",
+    path: "/makaleler",
+    title: "Makaleler",
+    name: "articles",
+    icon: "far fa-newspaper",
     showInMenu: true,
     color: "primary"
     /* component: LoadableComponent(() => import('../../scenes/About'))*/
@@ -68,4 +77,40 @@ export const appRouters: any = [
   }
 ];
 
-export const routers = [...appRouters];
+export const primaryRouters: any = [
+  {
+    path: "/anasayfa",
+    title: "Ana Sayfa",
+    name: "notes",
+    icon: "fas fa-home",
+    color: "primary",
+    showInMenu: true,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+  },
+  {
+    path: "/bildirimler",
+    title: "Bildirimler",
+    name: "notifications",
+    icon: "far fa-bell",
+    showInMenu: true,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+  },
+  {
+    path: "/mesajlar",
+    title: "Mesajlar",
+    name: "messages",
+    icon: "far fa-envelope",
+    showInMenu: true,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+  },
+  {
+    path: "/profil",
+    title: "Profil",
+    name: "profile",
+    icon: "far fa-paper-plane",
+    showInMenu: true,
+    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+  }
+];
+
+export const routers = [...appRouters, ...primaryRouters];

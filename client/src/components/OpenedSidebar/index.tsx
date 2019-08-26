@@ -9,15 +9,14 @@ import { ListItemIcon, ListItemText, Icon } from "@material-ui/core";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing(3, 2)
+      padding: theme.spacing(3, 2),
+      borderRadius: "20px"
     }
   })
 );
 
 interface ISidebarProps {
-  open?: boolean;
-  /*   handleDrawerClose(): void;
-   */ history: any;
+  history: any;
   path?: any;
 }
 
