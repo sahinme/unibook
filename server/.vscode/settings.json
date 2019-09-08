@@ -2,7 +2,7 @@
     "workbench.startupEditor": "newUntitledFile",
     "workbench.iconTheme": "material-icon-theme",
     "editor.formatOnSave": true,
-    "window.zoomLevel": 1.2,
+    "window.zoomLevel": 0,
     "breadcrumbs.enabled": true,
     "sync.gist": "c759a3b5d38ce0addcb92d7e7139dd82",
     "workbench.colorTheme": "Palenight Italic"

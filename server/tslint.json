@@ -68,5 +68,6 @@
         "no-null-keyword": true,
         "prefer-const": false,
         "jsdoc-format": true
+
     }
 }

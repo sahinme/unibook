@@ -9,6 +9,8 @@ import container from "./inversify.config";
 import { logger } from "./util/Logger";
 import { RegistrableController } from "./controller/RegisterableController";
 import "reflect-metadata";
+import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger.json";
 
 const app: express.Application = express();
 
@@ -22,6 +24,8 @@ const controllers: RegistrableController[] = container.getAll<
   RegistrableController
 >(TYPES.Controller);
 controllers.forEach(controller => controller.register(app));
+
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // setup express middleware logging and error handling
 app.use(function(
