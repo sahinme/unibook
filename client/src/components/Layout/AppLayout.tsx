@@ -2,7 +2,7 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import { Switch, Route, Redirect } from "react-router";
-import { appRouters } from "../Router/router.config";
+import { routers } from "../Router/router.config";
 import PrimarySearchAppBar from "../Header";
 import DocumentTitle from "react-document-title";
 import utils from "src/utils/utils";
@@ -31,7 +31,7 @@ export default function AppLayout(props: any) {
         <div style={{ marginTop: 13 }}></div>
         <Container maxWidth="lg">
           <Switch>
-            {appRouters
+            {routers
               .filter((item: any) => !item.isLayout)
               .map((route: any, index: any) => (
                 <Route

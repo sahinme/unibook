@@ -1,4 +1,4 @@
-export default class Post {
+export default class PostViewModel {
   id: number;
   title: string;
   description: string;

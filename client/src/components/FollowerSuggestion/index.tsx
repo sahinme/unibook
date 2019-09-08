@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       color: "#1da1f2",
       textTransform: "none",
-      fontWeight: 600
+      fontWeight: 600,
+      borderRadius: 25
     },
     extendedIcon: {
       marginRight: theme.spacing(1)

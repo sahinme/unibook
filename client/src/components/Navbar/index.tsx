@@ -3,10 +3,10 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import PhoneIcon from "@material-ui/icons/Phone";
 import "./index.css";
 import { primaryRouters } from "../Router/router.config";
-import { Icon } from "@material-ui/core";
+import { Icon, Avatar } from "@material-ui/core";
+import logo from "../../utils/aa.png";
 
 function a11yProps(index: any) {
   return {
@@ -38,6 +38,18 @@ export default function ScrollableTabsButtonForce(props: Props) {
     setValue(newValue);
   }
 
+  const profileTab = () => {
+    return (
+      <Tab
+        onClick={() => props.history.push("/profil")}
+        label="profile"
+        icon={
+          <Avatar src="https://pbs.twimg.com/profile_images/1133530124186476545/Od_DxKfq_bigger.jpg" />
+        }
+        {...a11yProps(12)}
+      />
+    );
+  };
   return (
     <div className={classes.root}>
       <AppBar

@@ -13,15 +13,7 @@ export const appRouters: any = [
     isLayout: true,
     showInMenu: false
   },
-  {
-    path: "/anasayfa",
-    title: "Ders Notları",
-    name: "notes",
-    icon: "far fa-paper-plane",
-    color: "primary",
-    showInMenu: false,
-    component: LoadableComponent(() => import("../../scenes/Dashboard"))
-  },
+
   {
     path: "/notes",
     title: "Ders Notları",
@@ -32,7 +24,7 @@ export const appRouters: any = [
     component: LoadableComponent(() => import("../../scenes/Dashboard"))
   },
   {
-    path: "/bildirimler",
+    path: "/staj-bul",
     title: "Staj Bul",
     name: "internships",
     icon: "far fa-address-card",
@@ -56,7 +48,7 @@ export const appRouters: any = [
     icon: "fas fa-university",
     color: "primary",
     showInMenu: true,
-    component: LoadableComponent(() => import("../ProfileCard"))
+    component: LoadableComponent(() => import("../../scenes/Colleges"))
   },
   {
     path: "/makaleler",
@@ -64,8 +56,8 @@ export const appRouters: any = [
     name: "articles",
     icon: "far fa-newspaper",
     showInMenu: true,
-    color: "primary"
-    /* component: LoadableComponent(() => import('../../scenes/About'))*/
+    color: "primary",
+    component: LoadableComponent(() => import("../../scenes/Articles"))
   },
   {
     path: "/logout",
@@ -93,7 +85,7 @@ export const primaryRouters: any = [
     name: "notifications",
     icon: "far fa-bell",
     showInMenu: true,
-    component: LoadableComponent(() => import("../../scenes/Dashboard"))
+    component: LoadableComponent(() => import("../../scenes/Notifications"))
   },
   {
     path: "/mesajlar",
