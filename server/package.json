@@ -44,7 +44,7 @@
     "express-session": "^1.16.2",
     "helmet": "^3.16.0",
     "inversify": "^5.0.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.5",
     "mssql": "^5.0.5",
     "pg": "^7.10.0",
